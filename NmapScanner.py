@@ -36,6 +36,28 @@ if scan_type == "1":
 	print("Open Ports: ", scanner[ip_addr]['tcp'].keys())
  
 elif scan_type == "2":
-	pass
+	print("Nmap version: ", scanner.nmap_version())
+	scanner.scan(ip_addr, "1-1337", "-v -sU")
+	print(scanner.scaninfo())
+
+	## Check IP status
+	print("IP Status: ", scanner[ip_addr].state())
+
+	## Use all protocols
+	print(scanner[ip_addr].all_protocols())
+	print("Open Ports: ", scanner[ip_addr]['udp'].keys())
+	
 elif scan_type == "3":
-	pass
+	print("Nmap version: ", scanner.nmap_version())
+	scanner.scan(ip_addr, "1-1337", "-v -sS -sV -sC -A -O")
+	print(scanner.scaninfo())
+
+	## Check IP status
+	print("IP Status: ", scanner[ip_addr].state())
+
+	## Use all protocols
+	print(scanner[ip_addr].all_protocols())
+	print("Open Ports: ", scanner[ip_addr]['tcp'].keys())
+	
+else:
+    print("The following unlisted option was choosen -> ", scan_type)
